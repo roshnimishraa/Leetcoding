@@ -10,31 +10,21 @@
  */
 class Solution {
 public:
-
-ListNode* removeElements(ListNode* head, int val) {
-    
-    while(head != NULL && head -> val == val)    // eg [7, 7, 7, 5] val = 7, then we have to delete all 7 and move head to 5.
-    {
-        head = head -> next;
-    }
-    
-    if(head == NULL)            // eg [7, 7, 7, 7] val = 7, then we have to delete all 7 and return NULL.
-        return head;
-    
-    ListNode* curr = head;
-    
-    while(curr -> next != NULL)
-    {
-        if(curr -> next -> val == val)
-        {
-            curr -> next = curr -> next -> next;
+    ListNode* removeElements(ListNode* head, int val) {
+      if(head == NULL) return NULL;
+        
+//     Recursion work 
+        head -> next = removeElements(head->next,val);
+        
+//         my work
+        // head == val
+        if(head -> val == val){
+ListNode* ans = head->next ;
+            delete head;
+            return ans;
         }
-        else  
-        {
-            curr = curr -> next;
+        else{
+            return head;
         }
     }
-    
-    return head;
-}
 };
