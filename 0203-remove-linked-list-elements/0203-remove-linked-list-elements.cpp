@@ -11,19 +11,19 @@
 class Solution {
 public:
     ListNode* removeElements(ListNode* head, int val) {
-      if(head == NULL) return NULL;
         
-//     Recursion work 
-        head -> next = removeElements(head->next,val);
-        
-//         my work
-        // head == val
-        if(head -> val == val){
-ListNode* ans = head->next ;
-            delete head;
-            return ans;
+// BASE CONDITION 
+        if(head == NULL){
+            return NULL;
         }
-        else{
+    
+//Recursion work
+        head ->next = removeElements(head->next,val);
+//     my work 
+        if(head->val  == val){
+            return head->next;
+        }
+        else {
             return head;
         }
     }
