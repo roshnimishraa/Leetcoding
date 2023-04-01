@@ -23,14 +23,15 @@ public:
             return right;
         }
  //   if I don't found value from right till the end 
-       if(right == NULL){
+      else if(right == NULL){
             return left;
         }
         
 //     if left and right not equal to NULL then we get the ancestor
-        if(left != NULL && right != NULL){
-            return root;
-        }
+        // if(left != NULL && right != NULL){
+        else{ 
         return root;
+        }
+      
     }
 };
