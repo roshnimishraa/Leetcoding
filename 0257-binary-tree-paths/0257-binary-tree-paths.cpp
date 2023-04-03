@@ -10,26 +10,28 @@
  * };
  */
 class Solution {
-    public:
-    void helper(TreeNode* root,string output,vector<string> &ans){
-        if(root == NULL) return;
-
-    if(root->left != NULL || root->right != NULL ){
-          output += (to_string(root->val)+"->");
-    }
-    else{
-        output += (to_string(root->val));
-        ans.push_back(output);
-    }
- helper(root->left , output,ans);
-    helper(root->right,output,ans);
-}
 public:
-    vector<string> binaryTreePaths(TreeNode* root) {
-      vector<string>ans;
-        string output = "";
+    void helper(TreeNode* root,vector<string> &ans,string output)
+    {
+        if(root == NULL){
+            return;
+        }
         
-        helper(root,output,ans);
+      if(root->left != NULL || root->right != NULL){
+         output += (to_string(root->val)+"->");
+      }
+        else{
+         output += (to_string(root->val));
+            ans.push_back(output);
+        }
+//         recursive call
+        helper(root->left,ans,output);
+        helper(root->right,ans,output);
+    }
+    vector<string> binaryTreePaths(TreeNode* root) {
+      vector<string> ans;
+        string output= "";
+        helper(root,ans,output);
         return ans;
     }
 };
