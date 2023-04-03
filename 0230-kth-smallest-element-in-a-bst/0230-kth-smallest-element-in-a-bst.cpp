@@ -10,27 +10,16 @@
  * };
  */
 class Solution {
-   int helper(TreeNode* root,int& i,int k)
-    {
-          if(root == NULL){
-         return -1;
-     }   
-        int left = helper(root->left,i,k);
-        if(left !=-1){
-            return left;
-        }
-        i++;
-        if(i==k){
-            return root->val;
-        }
-        else{
-            return helper(root->right,i,k);
-        }
+    	vector<int>v;
+    void inorder(TreeNode* root){
+        if(root == NULL) return;
+        inorder(root->left);
+        v.push_back(root->val);
+        inorder(root->right);
     }
 public:
     int kthSmallest(TreeNode* root, int k) {
-   int i=0;
-        int ans = helper(root,i,k);
-        return ans;
+        inorder(root);
+        return v[k-1];
     }
 };
