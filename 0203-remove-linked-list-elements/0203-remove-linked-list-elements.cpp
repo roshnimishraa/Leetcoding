@@ -12,19 +12,18 @@ class Solution {
 public:
     ListNode* removeElements(ListNode* head, int val) {
         
-// BASE CONDITION 
+//     base case 
         if(head == NULL){
-            return NULL;
-        }
-    
-//Recursion work
-        head ->next = removeElements(head->next,val);
-//     my work 
-        if(head->val  == val){
-            return head->next;
-        }
-        else {
             return head;
+        }
+//     recursion work 
+     head->next= removeElements(head->next,val);
+    // my work
+        if(head->val == val){
+          return head->next;
+        }
+        else{
+return head;
         }
     }
 };
