@@ -11,7 +11,6 @@
 class Solution {
 public:
     ListNode* reverseKGroup(ListNode* head, int k) {
-//          base case 
         if(head == NULL){
             return NULL;
         }
