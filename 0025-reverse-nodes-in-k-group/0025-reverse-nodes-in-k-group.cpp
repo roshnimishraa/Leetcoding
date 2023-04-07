@@ -11,28 +11,37 @@
 class Solution {
 public:
     ListNode* reverseKGroup(ListNode* head, int k) {
-//         corner case 
-        ListNode* temp = head;
-        for(int i =0;i<k ;i++){
-            if(temp == nullptr)
+//        Base Case
+        if(head == NULL){
+            return NULL;
+        }
+    
+//         Corner Case 
+// Last node K pointing to null
+        ListNode* temp =head;
+        for(int i=0;i<k;i++){
+            if(temp == NULL)
                 return head;
-            temp= temp->next;
+            temp = temp->next;
         }
         
-    ListNode* next=NULL;
-        ListNode* prev =NULL;
-        ListNode* curr=head;
-        int count=0;
-        while(curr != NULL && count < k){
-            next = curr->next;
+        ListNode* next = NULL;
+        ListNode* prev = NULL;
+        ListNode* curr = head;
+        int count =0;
+        
+        while( curr != NULL && count < k){
+            next = curr -> next;
             curr->next = prev;
-            prev=curr;
-            curr=next;
+            prev = curr;
+            curr= next;
             count++;
+            
         }
         if(next != NULL){
             head->next = reverseKGroup(next,k);
         }
+//         return head of reversed LL
         return prev;
-    }
+     }
 };
