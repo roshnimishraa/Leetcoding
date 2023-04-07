@@ -11,43 +11,32 @@
 class Solution {
 public:
     ListNode* reverseKGroup(ListNode* head, int k) {
-        if(head == NULL){
-            return NULL;
+        // if(head == NULL){
+        //     return NULL;
+        // }
+        ListNode* temp =head;
+        for(int i=0;i<k;i++){
+            if(temp == NULL){
+                return head;
+            }
+            temp = temp->next;
         }
         
-        //base condition
-        //to not reverse the last group which is less than k
-        ListNode* temp=head;
-        for(int i=0;i<k;i++)
-        {
-            if(temp==nullptr)
-                return head;
-            temp=temp->next;
-        }
-    
-//         STEP1: Reverse first k group (My Work)
-        ListNode* next = NULL;
-        ListNode* curr = head;
-        ListNode* prev = NULL;
+        ListNode* next= NULL;
+        ListNode* prev= NULL;
+        ListNode* curr= head;
         int count =0;
         
-        while(curr != NULL && count<k){
-        next = curr -> next;
-
-//   direction change kro 
-            curr->next = prev ;
+        while(curr != NULL && count < k){
+            next = curr->next;
+            curr->next = prev;
             prev = curr;
             curr = next;
-//         increase count till k
-        count++;
+            count++;
         }
-        
-//     step2: Recursion work
         if(next != NULL){
-//    Do reverse after head-> next elements         
-            head -> next = reverseKGroup(next,k);
+            head->next = reverseKGroup(next,k);
         }
-//  step3: Return head of reversed list 
         return prev;
     }
 };
