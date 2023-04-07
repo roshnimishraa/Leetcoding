@@ -8,22 +8,26 @@
  */
 class Solution {
 public:
- ListNode *detectCycle(ListNode *head) {
+    ListNode *detectCycle(ListNode *head) {
+        ListNode* slow =head;
         ListNode* fast = head;
-        ListNode* slow = head;
-        while(fast != NULL && fast -> next != NULL) {
-            slow = slow -> next;
-            fast = fast -> next -> next;
-            if(fast == slow) {
-                ListNode* temp = head;
-                while(slow != temp) {
-                    slow = slow -> next;
-                    temp = temp -> next;
+        while(fast!=NULL && fast->next != NULL){
+            slow = slow->next;
+            fast = fast->next->next;
+            
+//             Cycle Detected
+// Corner Case: First Meeting is head
+            if(slow == fast)
+            {
+                ListNode* temp =head;
+                while(slow !=temp){
+                      temp = temp -> next;
+                    slow=slow->next;
+                    
                 }
                 return temp;
-            }
+            }    
         }
         return NULL;
     }
-    
 };
