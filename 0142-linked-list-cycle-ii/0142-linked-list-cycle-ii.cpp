@@ -34,6 +34,6 @@ ListNode* fast =head;
             ptr2 = ptr2->next;
         }
 //         ptr1 & ptr2 meet
-        return ptr1;
+        return ptr2;
     }
 };
