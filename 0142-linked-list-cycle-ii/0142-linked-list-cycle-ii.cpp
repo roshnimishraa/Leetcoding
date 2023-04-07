@@ -9,25 +9,31 @@
 class Solution {
 public:
     ListNode *detectCycle(ListNode *head) {
+ 
         ListNode* slow =head;
-        ListNode* fast = head;
-        while(fast!=NULL && fast->next != NULL){
+ListNode* fast =head;
+        
+        while(fast != NULL && fast->next != NULL){
             slow = slow->next;
-            fast = fast->next->next;
+            fast=fast->next->next;
             
-//             Cycle Detected
-// Corner Case: First Meeting is head
-            if(slow == fast)
-            {
-                ListNode* temp =head;
-                while(slow !=temp){
-                      temp = temp -> next;
-                    slow=slow->next;
-                    
-                }
-                return temp;
-            }    
+            if(fast == slow) {
+                break;
+            }
         }
-        return NULL;
+        
+//     No Cycle 
+        if(fast == NULL || fast -> next == NULL) return NULL;
+//    Loop Detected slow and fast meet 
+        ListNode* ptr1=head;
+        ListNode* ptr2 = slow;  
+        
+        while(ptr1 != ptr2)
+        {
+            ptr1=ptr1->next;
+            ptr2 = ptr2->next;
+        }
+//         ptr1 & ptr2 meet
+        return ptr1;
     }
 };
