@@ -12,6 +12,7 @@ class Solution
     private:
 bool knows(vector<vector<int> >& M,int a,int b,int n)
 {
+    
   if(M[a][b] == 1)
       return true;
          
@@ -38,10 +39,12 @@ bool knows(vector<vector<int> >& M,int a,int b,int n)
             
             int b = s.top();
             s.pop();
-            
+
+// if a knows b then discard a and push b
             if(knows(M,a,b,n)){
                 s.push(b);
             }
+// if b knows a then discard b and push a
             else
             {
                 s.push(a);
@@ -52,17 +55,19 @@ bool knows(vector<vector<int> >& M,int a,int b,int n)
         //so verify it
         
         int zeroCount = 0;
-        
+ // 1. RowCheck: Celebrity knows NO ONE - all 0
+ 
         for(int i=0; i<n; i++) {
             if(M[ans][i] == 0)
                 zeroCount++;
         }
         
-        //all zeroes
+        // check all zeroes
         if(zeroCount != n)
             return -1;
         
         //column check
+// Everyone knows Celebrity: All 1 except diagonal(0)
         int oneCount = 0;
         
         for(int i=0; i<n; i++) {
