@@ -1,7 +1,7 @@
 class Solution {
 public:
     vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
-        unordered_map<int,int>umap;
+       unordered_map<int,int>umap;
         stack<int> st;
     int n = nums2.size();
 //   storing nextgr element of nums2 in stack
