@@ -26,6 +26,8 @@ public:
         
         s.push(i);
     }
+
+//         Process Remaining Elements of a stack
     while(s.empty()==false){
         
         tp=s.top();
