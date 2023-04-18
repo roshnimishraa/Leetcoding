@@ -3,13 +3,13 @@ class Solution
     public:
         ListNode* findMiddle(ListNode *head)
         {
-            ListNode *slow = head;
-            ListNode *fast = head->next;
-            while (fast && fast->next)
-            {
-                fast = fast->next->next;
-                slow = slow->next;
-            }
+              ListNode *slow = head;
+        ListNode *fast = head;
+        
+        while(fast->next != NULL && fast->next->next != NULL){
+            fast = fast->next->next;
+            slow = slow->next;
+        }
             return slow;
         }
     ListNode* reverse(ListNode *head)
