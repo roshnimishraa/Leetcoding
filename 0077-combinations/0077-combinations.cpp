@@ -1,31 +1,37 @@
 class Solution {
-    void helper(int index,int n,int k,vector<int> &output,vector<vector<int>> &ans)
+
+    void helper(int index,int n, int k,vector<int> &output,
+               vector<vector<int>> &ans)
     {
-if(k==0){
+   if(k==0){
     ans.push_back(output);
     return;
 }
-        
- if(index > n)
- {
-           return; 
+if(index>n){
+    return;
 }
         
+if(k>n-index+1){
+    return;
+}
+
 //     include
         output.push_back(index);
         helper(index+1,n,k-1,output,ans);
         output.pop_back();
         
-// exclude 
+//     exclude
         helper(index+1,n,k,output,ans);
     }
-public:
+ public:
+    
     vector<vector<int>> combine(int n, int k) {
         vector<vector<int>> ans;
-        int index=1;
-      vector<int> output;
+        vector<int> output;
         
-        helper(index,n,k,output,ans);
+        int index=1;
+        
+helper(1,n,k,output,ans);
         return ans;
     }
 };
