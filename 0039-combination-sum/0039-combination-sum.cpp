@@ -21,6 +21,8 @@ void helper(int index,int sumTillNow,vector<int>& arr,int target,
 //     include
     sumTillNow += arr[index];
 output.push_back(arr[index]);
+      // We keep on the i-th Element & ask recursion to do rest of the task
+    
     helper(index,sumTillNow,arr,target,output,ans);
     output.pop_back();
 }
