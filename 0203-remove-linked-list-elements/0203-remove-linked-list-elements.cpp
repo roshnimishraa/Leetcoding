@@ -11,19 +11,19 @@
 class Solution {
 public:
     ListNode* removeElements(ListNode* head, int val) {
-        
-//     base case 
-        if(head == NULL){
+        if(head == NULL) {
             return head;
         }
-//     recursion work 
-     head->next= removeElements(head->next,val);
-    // my work
+//     Recursion head->next your work to remove occurence of 
+//         nodeToDelete
+        head->next = removeElements(head->next,val);
+        
+//     my word
         if(head->val == val){
-          return head->next;
+            return head->next;
         }
         else{
-return head;
+            return head;
         }
     }
 };
