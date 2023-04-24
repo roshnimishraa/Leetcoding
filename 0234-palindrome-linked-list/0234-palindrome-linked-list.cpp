@@ -38,7 +38,7 @@ class Solution
 
         ListNode *temp1 = head;
         ListNode *temp2 = middle->next;
-        while (temp2)
+        while (temp2 != nullptr)
         {
             if (temp1->val != temp2->val)
                 return false;
