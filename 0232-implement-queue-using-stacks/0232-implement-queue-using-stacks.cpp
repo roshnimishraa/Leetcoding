@@ -1,30 +1,3 @@
-// Making pop operation costly
-/* Algo 
-push(x)
-1. add x-> input
-
-pop()
- if(output is empty)
- then 
- input -> output   i.e output.push(input.top());
- output.pop 
- 
- else 
-  int ans = output.top();
-  output.pop();
-  return ans;
-  
-  
-top()
-if(output is empty)
-input -> output 
-input.pop();
-
-else
-
-return output.top()
-*/
-
 class MyQueue {
 public:
     stack<int> input;
@@ -40,36 +13,34 @@ public:
     }
     
     int pop() {
-       if(output.empty()){
-         while(!input.empty())
-         {
-             output.push(input.top());
-            input.pop();
-         }
-      
+        if(output.empty())
+        {
+        while(!input.empty())
+        {
+            output.push(input.top());
+        input.pop();
         }
-    
-//         output is not empty
-        int ans = output.top();
+        }
+        
+    int ans = output.top();
         output.pop();
         return ans;
-        
     }
     
     int peek() {
-     if(output.empty()){
-         while(!input.empty()){
-             output.push(input.top());
-             input.pop();
-         }
-         
-     }
- 
-        return output.top();
+        if(output.empty())
+        {
+while(!input.empty()){
+    output.push(input.top());
+    input.pop();
+}
+        }
+        
+    return output.top();
     }
     
     bool empty() {
-        return output.empty() && input.empty();
+        return input.empty() && output.empty();
     }
 };
 
