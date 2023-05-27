@@ -1,3 +1,15 @@
+
+/*Algo For push 
+push(x)
+1. s1-> s2
+2. x->s1
+3. s2 -> s1
+
+pop()
+s1.pop()
+*/
+
+
 class MyQueue {
 public:
     stack<int>s1;
