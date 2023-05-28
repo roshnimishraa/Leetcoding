@@ -1,5 +1,18 @@
+// Algo: Implement stack using queue
+/* 
+push(x)
+1. enqueue x->q2
+2. q1->q2
+3. swap(q1&q2) 
+
+Pop
+q1.pop()
+*/
+
 class MyStack {
 public:
+    
+    
     queue<int> q1;
     queue<int> q2;
     MyStack() {
