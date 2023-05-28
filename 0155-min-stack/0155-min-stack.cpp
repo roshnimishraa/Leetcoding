@@ -1,49 +1,55 @@
-/*Create two stack st and min_st
-for push(x)
-1. check if val <= min_st or empty then push in min_st
-2. push value in st
-
-for pop
-1. if elementToDeleted is present in st and min_st then pop from min_st & st
-
-for top
-st.top()
-
-for getMin
-return st.top();
-
-*/
-
 class MinStack {
+     stack < long long > st;
+  long long mini;
 public:
-    stack<int> st;
-    stack<int> min_st;
     MinStack() {
-        st = stack<int>();
-        min_st = stack<int>();
+         while (st.empty() == false) st.pop();
+      mini = INT_MAX;
     }
     
     void push(int val) {
-        if(min_st.empty() || val <= min_st.top())
-        {
-            min_st.push(val);
-            
-        }
-        st.push(val);
+   long long res =val;
+    if (st.empty()) {
+      mini = res;
+      st.push(res);
+    } else {
+      if (res < mini) {
+        st.push(2 *res*1LL - mini);
+        mini = res;
+      } else {
+        st.push(res);
+      }
+    }  
     }
     
     void pop() {
-        if(st.top() == min_st.top()){
-            min_st.pop();
-        }
-        st.pop();
+      if (st.empty()) return;
+    long long el = st.top();
+    st.pop();
+
+    if (el < mini) {
+      mini = 2 * mini - el;
+    }   
     }
     
     int top() {
-        return st.top();
+         if (st.empty()) return -1;
+
+    long long el = st.top();
+    if (el < mini) return mini;
+    return el;
     }
     
     int getMin() {
-        return min_st.top();
+          return mini;
     }
 };
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack* obj = new MinStack();
+ * obj->push(val);
+ * obj->pop();
+ * int param_3 = obj->top();
+ * int param_4 = obj->getMin();
+ */
