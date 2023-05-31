@@ -4,6 +4,7 @@ public:
           vector<int> output;
         int i=0;
         int j=0;
+        
         list<int> l;
         while(j<nums.size())
         {
@@ -21,6 +22,8 @@ public:
             else if(j-i+1==k)
             {
                 output.push_back(l.front());
+            
+            //remove i calculations 
                 if(nums[i]==l.front())
                     l.pop_front();
                 ++i;
