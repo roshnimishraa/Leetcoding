@@ -7,7 +7,7 @@ using namespace std;
 //User function template for C++
 class Solution{
 public:	
-	// Function returns the second
+//Brute Force Approach : O(2N)
 	// largest elements
 	int print2largest(int arr[], int n) {
  int largest = arr[0];
