@@ -12,9 +12,9 @@ public:
             }
             else{
                 curr++;
-              
+               res = max(res,curr);
             }
-              res = max(res,curr);
+             
         }
         return res;
     }
