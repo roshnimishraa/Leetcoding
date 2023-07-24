@@ -1,18 +1,16 @@
 class Solution {
 public:
-    void reverse(vector<int> &nums,int low,int high){
-        int n = nums.size();
-        while(low<high){
-            swap(nums[low],nums[high]);
-            low++;
-            high--;
-        }
-    }
     void rotate(vector<int>& nums, int k) {
-        int n=nums.size();
-        k = k%n;
-        reverse(nums,0,n-k-1);
-        reverse(nums,n-k,n-1);
-        reverse(nums,0,n-1);
+//  % -> it gives no. from (0 to n-1)
+   
+        int n = nums.size();
+        
+        vector<int> temp(n);
+        for(int i=0;i<n;i++){
+            temp[(i+k) % n] = nums[i];
+            
+        }
+//         copy temp into nums vector 
+        nums = temp;
     }
 };
