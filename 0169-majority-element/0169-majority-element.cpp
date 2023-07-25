@@ -1,17 +1,35 @@
 class Solution {
 public:
     int majorityElement(vector<int>& nums) {
-        unordered_map<int,int> umap;
-        int n=nums.size();
         int count =0;
-        for(int i=0;i<n; i++){
-            umap[nums[i]]++;
-        }
+        int element;
         
-//         iterating through map
-        for(auto it: umap){
-            if(it.second > (n/2)){
-                return it.first; //return key
+        int n = nums.size();
+        
+    for(int i=0;i<n;i++){
+        if(count == 0){
+            count =1;
+            element = nums[i];
+            
+        }
+       else if(nums[i] == element){
+            count++;
+        }
+        else{
+                 //(nums[i] != element)  
+            count--;
+        }
+
+    }
+        int count1 = 0;
+        //got the majority element 
+        for(int i=0;i<n;i++){
+            if(nums[i] == element) {
+                count1++;
+            }
+            
+            if(count1 > n/2){
+                return element;
             }
         }
         return -1;
