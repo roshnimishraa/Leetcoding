@@ -12,24 +12,23 @@ class Solution {
     // Function to return the count of the number of elements in
     // the intersection of two arrays.
     int NumberofElementsInIntersection(int a[], int b[], int n, int m) {
-        unordered_set<int> st;
-        for(int i=0;i<n;i++){
-         //   st[a[i]]++;
-         st.insert(a[i]);
-        }
-        
-        int count= 0;
-        for(int i=0;i<m;i++){
-            int key = b[i];
-            if(st.find(key) != st.end()){
-                count++;
-                
-                //if in a[i] there is duplicate elements
-                st.erase(key);
-            }
-            
-        }
-        return count;
+        // Your code goes here
+    unordered_set<int> s;
+    
+    for(int i=0;i<n;i++){
+        s.insert(a[i]);
+    }
+   
+   int count =0;
+   for(int i=0;i<m;i++){
+       int key = b[i];
+       if(s.find(key) != s.end()){
+           count++;
+       }
+       //if a[i] is repeating therefore erase it
+       s.erase(key);
+   }
+   return count;
     }
 };
 
