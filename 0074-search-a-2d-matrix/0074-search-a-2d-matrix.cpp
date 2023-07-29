@@ -8,19 +8,18 @@ public:
         if(n == 0 || m == 0)
             return false;
         
-		// treating matrix as array just taking care of endices
-		// [0..n*m]
+	
         int start = 0, end = m*n - 1;
         
         while(start <= end)
         {
-            int mid = start + (end - start) / 2;
+     int mid = start + (end - start) / 2;
 			// a[x] : matrix[x / m][x % m] formulae
-            int ind = matrix[mid/m][mid%m];
-            if (target == ind)
+            int indexValue = matrix[mid/m][mid%m];
+            if (target == indexValue)
                 return true;
 			// left half
-            else if(target < ind)
+            else if(target < indexValue)
                 end = mid - 1;
             else
 			// right half
