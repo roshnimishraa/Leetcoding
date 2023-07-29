@@ -1,32 +1,36 @@
 class Solution {
 public:
     string reverseWords(string s) {
-        if(s.size() == 0)  return s;
-        stack<string> st;
-        string result;
-        int n = s.size();
-        for(int i=0;i<n;i++){
-            string word;
+        int n =s.length();
+        int left = 0 , right=0;
+    int i=0;
+        
+//  1. Reverse the entire array
+        reverse(s.begin(),s.end());
+        while(i < n){    
+    while(i < n && s[i] == ' '){
+        i++;
+    } 
+      
+while(i< n && s[i] != ' '){
+    s[right++] = s[i++];
+    
+}
+
+//2. Reverse word 
+        if(left < right){
+            reverse(s.begin()+left,s.begin()+right);
             
-            if(s[i] == ' ')  continue;
-            
-            while(i < n && s[i] != ' '){
-                word += s[i];
-                i++;
-            }
-            st.push(word);
-            
+             // Add a space after the reversed word
+        s[right++]=' ';
+   
+//update the left index for the next word
+            left = right;
         }
-        while(!st.empty())
-        {
-            result += st.top();
-            st.pop();
-            
-            if(!st.empty()) {
-                result += " ";
-                
-            }
-        }    
-        return result;
-     }
+    i++;
+        }
+         // Add a space after the reversed word
+      s = s.substr(0,right-1);
+        return s;
+    }
 };
