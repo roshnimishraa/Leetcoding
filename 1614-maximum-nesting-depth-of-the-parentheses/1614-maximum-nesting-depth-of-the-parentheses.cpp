@@ -8,7 +8,8 @@ public:
             char ch = s[i];
             
             if(ch == '(')
-                ans = max(ans,++curr);
+                curr++;
+                ans = max(ans,curr);
             
             if(ch == ')')
                 curr--;
