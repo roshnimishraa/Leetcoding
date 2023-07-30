@@ -1,32 +1,34 @@
 class Solution {
 public:
     string frequencySort(string s) {
-        unordered_map<char,int> umap;
-          string ans ="";  
-        for(int i=0;i<s.length();i++){
-            umap[s[i]]++; 
-                  
-        }
-    priority_queue< pair<int,char> > pq;
+        vector<vector<char>> bucket(s.size()+1); // DONT FORGET +1 to size!!
+        unordered_map<char, int> m;
+        string ans;
         
-    //iterate through map to push elements & freq in priority queue
+        // 1. map of character to its frequency        
+        for (const auto& e : s)        
+            m[e]++;        
+           
+		// 2. make the buckets
+        // idx represents frequency
+        // value at index represents characters with that frequency
+        for (const auto& e : m)        
+            bucket[e.second].push_back(e.first);
         
-    for(auto it : umap){
-        pq.push({it.second,it.first});
-    }
-   
-//Till maxHeap gets empty
-        while(!pq.empty()){
-//      take first element from max heap 
-            int n= pq.top().first;
-            
-            //if n=2 print
-          while(n--){
-              //(2,e) // print e two times 
-              ans +=pq.top().second;
-          }
-            pq.pop();
-        }
+                
+        // 3. now reconstruct the string
+        for (int i = bucket.size() - 1; i > 0; i--)
+        {
+            // for each character in the bucket
+            for (int j = 0; j < bucket[i].size(); j++)
+            {
+                // append it i number of times
+                // i.e character 'e' at bucket 3 will be appended 3 times -> "...eee"
+                for (int count = i; count > 0; count--)
+                    ans += bucket[i][j];
+            }
+        }          
+        
         return ans;
-        }
+    }
 };
