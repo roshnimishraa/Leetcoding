@@ -1,18 +1,5 @@
-// Algo: Implement stack using queue
-/* 
-push(x)
-1. enqueue x->q2
-2. q1->q2
-3. swap(q1&q2) 
-
-Pop
-q1.pop()
-*/
-
 class MyStack {
 public:
-    
-    
     queue<int> q1;
     queue<int> q2;
     MyStack() {
@@ -20,24 +7,23 @@ public:
     }
     
     void push(int x) {
-   q2.push(x);
-        while(!q1.empty())
-        {
-      q2.push(q1.front());
-            q1.pop();
-        }
+     q2.push(x);
+while(!q1.empty()){
+       //from q1 -> q2
+    q2.push(q1.front());
+    q1.pop();
+    }
         swap(q1,q2);
     }
-
+    
     int pop() {
-int ans = top();
+     int ans = top();
         q1.pop();
         return ans;
-        
     }
     
     int top() {
-        return q1.front();
+        return (q1.front());
     }
     
     bool empty() {
