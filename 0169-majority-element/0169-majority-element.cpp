@@ -1,24 +1,34 @@
 class Solution {
 public:
     int majorityElement(vector<int>& nums) {
-    unordered_map<int,int> umap;
-        int maxiCount =0;
-        int maxiEle =0;
-    int n=nums.size();
+            int n = nums.size();
+        int count =0;
+        int element ;
     for(int i=0;i<n;i++){
-        umap[nums[i]]++;
-    }
-        
-    for(int i=0;i<n;i++){
-        int key = nums[i];
-        auto temp = umap.find(key);
-        
-        //condition
-        if(temp->second > maxiCount){
-            maxiCount = temp->second;
-        maxiEle = temp->first;
+        if(count == 0){
+            count=1;
+            element = nums[i];
         }
-    }
-        return maxiEle;
+        else if(nums[i] == element){
+            
+            count++;
+        } 
+            else{
+//                 nums[i] != element 
+                count--;
+                
+            }
+        }
+//is it correct ans or not if ans > (n/2) then it is correct 
+        int count1=0;
+        for(int i=0;i<n;i++){
+            if(nums[i] == element){
+                count1++;
+            }
+            if(count1 > (n/2)){
+                return element;
+            }
+        }
+        return -1;
     }
 };
