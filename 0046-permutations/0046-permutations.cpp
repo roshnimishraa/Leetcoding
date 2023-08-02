@@ -1,32 +1,27 @@
 class Solution {
-    void helper(vector<int> &nums,int n, vector<int> &output,vector<vector<int>> &ans, unordered_set<int> &s){
-       
-     
-        if(output.size() == n){
-            ans.push_back(output);
+    void helper(vector<int> &nums,int n,int index,vector<vector<int>> &ans)
+    {
+        // corner case  
+        //index out of bound
+        if(index>=n){
+      ans.push_back(nums);
             return;
-        }
-        for(int i=0;i<n;i++){
-            if(s.find(nums[i]) == s.end()){
-                output.push_back(nums[i]);
-                s.insert(nums[i]);
-                helper(nums,n,output,ans,s);
-             
-                   //exclude
-                output.pop_back();
-               s.erase(nums[i]);
-            }
-         
-                
+}
+        for(int i=index;i<n;i++){
+//swap
+            swap(nums[i],nums[index]);
+            helper(nums,n,index+1,ans);
+            swap(nums[i],nums[index]);
+            
         }
     }
 public:
     vector<vector<int>> permute(vector<int>& nums) {
-        vector<vector<int>>ans;
-     vector<int> output;
         int n=nums.size();
-           unordered_set<int> s;
-        helper(nums,n,output,ans,s);
+        vector<vector<int>> ans;
+
+        int index=0;
+        helper(nums,n,index,ans);
         return ans;
     }
 };
