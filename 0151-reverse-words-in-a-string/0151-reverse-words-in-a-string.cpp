@@ -1,7 +1,9 @@
 class Solution {
+  
 public:
     string reverseWords(string s) {
-        int n =s.length();
+        
+          int n =s.length();
         int left = 0 , right=0;
     int i=0;
         
