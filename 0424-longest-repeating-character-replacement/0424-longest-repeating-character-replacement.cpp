@@ -12,7 +12,7 @@ int maxCount=0; // no of repeating
       
         int windowSize = j-i+1;
         if(windowSize - maxCount > k){
-            umap[s[i]]--;
+            umap[s[i]]--;//slide the window
         i++;
         }
         ans = max(ans,j-i+1);
