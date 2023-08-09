@@ -1,33 +1,33 @@
-class Solution
-{
-public:
-    bool isPossible(vector<int> &piles, int speed, int h)
-    {
-        long long count = 0;
-        for (int i = 0; i < piles.size(); i++)
-        {
-            count += ceil(piles[i] / (double)speed);
-        }
-        return count <= h;
+class Solution {
+ int findMax(vector<int> &v){
+       int maxi=INT_MIN;
+        for(int i=0;i<v.size();i++){
+            maxi=max(v[i],maxi);
+}
+        return maxi;
     }
-
-    int minEatingSpeed(vector<int> &piles, int h)
-    {
-        int low = 1, high = INT_MIN;
-        for (int i = 0; i < piles.size(); i++)
-            high = max(high, piles[i]);
-        int ans = INT_MAX;
-        while (low <= high)
-        {
-            int mid = low + (high - low) / 2;
-            if (isPossible(piles, mid, h))
-            {
-                ans = mid;
-                high = mid - 1;
+    
+long long calculateHours(vector<int> &v,int hourly){
+long long totalH=0;
+    for(int i=0;i<v.size();i++){
+       totalH += ceil((double)(v[i])/(double)(hourly));
+    }
+    return totalH;
+}
+public:
+    int minEatingSpeed(vector<int>& piles, int h) {
+        long long  low=1;
+        long long high=findMax(piles);
+        while(low<=high){
+            long long mid=(low+high)/2;
+     long long totalH = calculateHours(piles,mid);
+            if(totalH <= h){
+                high = mid-1;
             }
-            else
-                low = mid + 1;
+            else{
+                low=mid+1;
+            }
         }
-        return ans;
+        return low;
     }
 };
