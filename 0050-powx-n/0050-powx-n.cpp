@@ -1,4 +1,4 @@
-class Solution {
+ class Solution {
 public:
     double myPow(double x, int n) {
         double ans =1.0;
@@ -21,6 +21,7 @@ public:
         //if n is -ve no then 1/-ve = +ve 
         if(n<0)
             ans= (double)(1.0) / (double)(ans);
-        return ans;
+     
+      return ans;
     }
 };
