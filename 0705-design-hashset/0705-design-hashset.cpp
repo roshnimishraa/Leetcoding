@@ -1,44 +1,42 @@
 class MyHashSet {
 public:
-      vector<list<int>> m;
+    vector<list<int>> m;
     int size;
-//     CHAINING METHOD TO AVOID COLLISON 
     MyHashSet() {
-    size = 100;
+        size=100;
         m.resize(size);
-        
     }
-//   to insert -> k % m
     int hash(int key){
-        return key % size;
+      return key % size;
     }
     
 // iterator to iterate through list 
-list<int> :: iterator search(int key){
-    int i=hash(key);  
+    list<int> :: iterator search(int key) {
+        int i=hash(key);
+// find-> return an iterator [first,last) if not found return last
     return find(m[i].begin(),m[i].end(),key);
-}
+        
+    }
     void add(int key) {
-//      avoid duplicacy
-        if(contains(key)) return;
-// otherwise
-        int i=hash(key); //find index
-        m[i].push_back(key);
+  if(contains(key)) return;
+        
+        int i=hash(key);
+  m[i].push_back(key);    
     }
     
     void remove(int key) {
-        if(!contains(key)) return;
         int i=hash(key);
-//      erase function for doubly linked list
+        if(!contains(key)) return;
+    // for doubly linked list erase method is used
         m[i].erase(search(key));
     }
     
     bool contains(int key) {
-     int i=hash(key);       
-    //if(search(key) == m.end()) element is not present 
-        if(search(key) != m[i].end())  // element is present
-            return true;
-        else return false;
+        int i=hash(key);
+        
+    if(search(key) !=m[i].end()) return true;
+    else 
+        return false;
     }
 };
 
