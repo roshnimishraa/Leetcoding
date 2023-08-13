@@ -10,6 +10,7 @@ class Solution {
     for(int i=index;i<s.size();i++){
 //   include if its palindrom 
         if(isPalindrome(s,index,i)){
+//     s.substr(index,i-index+1) from index to partition 
             output.push_back(s.substr(index,i-index+1));
             helper(i+1,s,output,ans);
             output.pop_back();
