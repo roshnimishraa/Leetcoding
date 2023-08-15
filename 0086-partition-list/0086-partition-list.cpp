@@ -10,29 +10,26 @@
  */
 class Solution {
 public:
-     ListNode* partition(ListNode* head, int x) {
-        ListNode *left = new ListNode(0);
-        ListNode *right = new ListNode(0);
+    ListNode* partition(ListNode* head, int x) {
+        ListNode *small = new ListNode(0);
+        ListNode *large = new ListNode(0);
         
-        ListNode *leftTail = left;
-        ListNode *rightTail = right;
+        ListNode *smallP = small;
+        ListNode *largeP = large;
         
         while(head != NULL){
-            if(head->val < x){
-                leftTail->next = head;
-                leftTail = leftTail->next;
+       if(head->val < x){
+                smallP->next = head;
+             smallP= smallP->next;
             }
             else{
-                rightTail->next = head;
-                rightTail = rightTail->next;
+                largeP->next = head;
+                largeP = largeP->next;
             }
             head = head->next;
         }
-        
-        leftTail->next = right->next;
-        rightTail->next = NULL;
-        
-        return left->next;
+        smallP ->next = large -> next;
+        largeP -> next = NULL;
+        return small -> next;
     }
-
 };
