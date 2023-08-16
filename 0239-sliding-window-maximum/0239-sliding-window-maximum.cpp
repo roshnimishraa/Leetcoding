@@ -1,43 +1,30 @@
 class Solution {
 public:
     vector<int> maxSlidingWindow(vector<int>& nums, int k) {
-        list<int> l;
-        int i=0,j=0;
-        int n= nums.size();
+        int n = nums.size();
+        deque<int> dq;
         vector<int> ans;
-        while(j<n)
-        {
-    if(l.empty()){
-        l.push_back(nums[j]);
+    for(int i=0;i<n;i++){
+    //1. make space for nums[i] till window size(i-k)
+   // jo element push kr rhe h window size me agar uska prev usse small hai 
+// deq.front se pop kr do
+    while(!dq.empty()  && dq.front() <= i-k){
+        
+        dq.pop_front();
     }
-            
-  else
-            {
-                while(!l.empty() && l.back()<nums[j])
-                    l.pop_back();
-                l.push_back(nums[j]);               
-            }
-            if(j-i+1<k)
-            {
-                j++;
-            }
-               
-      else if(j-i+1 == k)
-        {
-//             ans <- calculation
-            ans.push_back(l.front());
-//             Slide the window
-//             remove i 
-            if(nums[i] == l.front())
-                l.pop_front();
-          
-            i++;
-            j++;
-
-               
-
+        
+//2. Jo next element agega vo prev wale se big ele to prev ko pop kr dena h
+    while(!dq.empty() && nums[i] > nums[dq.back()]){
+        dq.pop_back();
+    }
+//3 push i
+  dq.push_back(i);
+        
+//4. 
+        if(i>= k-1) {
+            ans.push_back(nums[dq.front()]);
         }
-        }
+    }
         return ans;
     }
 };
