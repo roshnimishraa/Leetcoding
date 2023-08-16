@@ -4,26 +4,25 @@ public:
         int n = nums.size();
         deque<int> dq;
         vector<int> ans;
-          if(n == 0)
-            return {}; 
-        
     for(int i=0;i<n;i++){
-    //1. make space for nums[i] till window size(i-k)
-   // jo element push kr rhe h window size me agar uska prev usse small hai 
-// deq.front se pop kr do
+   
+/* 1. m When new element comes nums[i], make space for it (Window Size can not be greater than K) */
+ 
     while(!dq.empty()  && dq.front() <= i-k){
         
         dq.pop_front();
     }
         
-//2. Jo next element agega vo prev wale se big ele to prev ko pop kr dena h
+/*  2. Now, when nums[i] comes there is no need to keep small elements in  that window pop */
+        
     while(!dq.empty() && nums[i] > nums[dq.back()]){
         dq.pop_back();
     }
-//3 push i
+        
+//3 now push i in dequeu -> for nums[i]
   dq.push_back(i);
         
-//4. 
+//4. if i>= k-1 then deq.front() is the answer for particular k size window  
         if(i>= k-1) {
             ans.push_back(nums[dq.front()]);
         }
