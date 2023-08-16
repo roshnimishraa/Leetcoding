@@ -1,23 +1,21 @@
 class Solution {
 public:
     vector<int> maxSlidingWindow(vector<int>& nums, int k) {
-        int n=nums.size();
+ priority_queue<pair<int,int>> pq;
         vector<int> ans;
-        deque<int> dq;
-    //chhota ele remove kro 
-for(int i=0;i<n;i++){
-    while(!dq.empty() && dq.front() <= i-k ){
-        dq.pop_front();
+    int n=nums.size();
+    for(int i=0;i<n;i++){
+        
+    while(!pq.empty() && pq.top().second <= i-k){
+        pq.pop();
     }
-    
-while(!dq.empty() && nums[i] > nums[dq.back()]){
-dq.pop_back();
-}
-    dq.push_back(i);
-    if(i>= k-1){
-    ans.push_back(nums[dq.front()]);
+        //we will always find the max element at top
+        pq.push({nums[i],i});
+        
+        if(i>=k-1){
+            ans.push_back(pq.top().first);
+        }
     }
-}
         return ans;
     }
 };
