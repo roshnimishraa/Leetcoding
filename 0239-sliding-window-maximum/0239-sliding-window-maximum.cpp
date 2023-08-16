@@ -4,6 +4,9 @@ public:
         int n = nums.size();
         deque<int> dq;
         vector<int> ans;
+          if(n == 0)
+            return {}; 
+        
     for(int i=0;i<n;i++){
     //1. make space for nums[i] till window size(i-k)
    // jo element push kr rhe h window size me agar uska prev usse small hai 
