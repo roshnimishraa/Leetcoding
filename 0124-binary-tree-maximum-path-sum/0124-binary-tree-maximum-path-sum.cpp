@@ -14,6 +14,7 @@ class Solution {
     {
         if(root == NULL) return 0;
 
+//if -ve path sum get from left and right make it 0 
         int left = max(0,maxPathDown(root->left,maxi));
         int right = max(0,maxPathDown(root->right,maxi));
         
