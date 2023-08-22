@@ -103,40 +103,41 @@ class Solution
     //Function to find the vertical order traversal of Binary Tree.
     vector<int> verticalOrder(Node *root)
     {
-        map<int,map<int,vector<int>>> nodes;
-        vector<int> ans;
-           queue<pair<Node*,pair<int,int>>> q;
-      if(root == NULL)  return ans;
-      
-      q.push(make_pair(root,make_pair(0,0)));
-      
-      while(!q.empty())
-      {
-         pair<Node*,pair<int,int>> temp = q.front();
-           q.pop();
-           
-         Node *frontNode = temp.first;
-         int hd= temp.second.first;
-         int lvl = temp.second.second;
-         
-         
-        nodes[hd][lvl].push_back(frontNode->data);
+    vector<int> ans;
+    map<int,vector<int>> mp;
+    queue<pair<Node *,int>> q;
+    q.push({root,0});
+    
+    while(!q.empty())
+    {
+        Node *f= q.front().first;
+      int dist = q.front().second;
         
-    if(frontNode->left != NULL)
-        q.push(make_pair(frontNode->left,make_pair(hd-1,lvl+1)));
+//q.pop -> so that segmentation fault does not occur because queue 
+// will keep growing and it will never come out of the loop
+q.pop();
+
+mp[dist].push_back(f->data);
+
+//level order traversing
+if(f->left){
+// in left subtree distance will be reduced
+    q.push({f->left,dist-1});
+}
+if(f->right){
+    //in right subtree distance will be increased
+    q.push({f->right,dist+1});
+}
+    }
     
-    
-    if(frontNode->right != NULL)
-        q.push(make_pair(frontNode->right,make_pair(hd+1,lvl+1)));
-  }
-   for(auto i:nodes){
-        for(auto j:i.second){
-            for(auto k:j.second){
-                ans.push_back(k);
-            }
+    //travering through map
+    for(auto mp_ele : mp){
+        //to get vector of integer
+        for(int y : mp_ele.second){
+            ans.push_back(y);
         }
     }
-      return ans;
+    return ans;
     }
 };
 
