@@ -14,13 +14,12 @@ public:
         }
         
         priority_queue<P, vector<P>> pq;
-        for(char ch = 'a'; ch <= 'z'; ch++) {
-            if(count[ch-'a'] > 0) {
-                pq.push({count[ch-'a'], ch});
-
-            }
-         }
-        
+     for(int i=0;i<26;i++){
+            char ch = i+'a';
+       if(count[i] > 0){
+           pq.push({count[i],ch});
+       }
+        }
         string result = "";
         
         while(pq.size() >= 2) {
