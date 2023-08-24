@@ -118,7 +118,7 @@ class Solution
      Node* frontNode = temp.first;
     // make second node as horizonal distance 
     int hd = temp.second;
-
+// if it does not exists
 if(mp.find(hd) == mp.end())
       mp[hd] = frontNode->data;
       
