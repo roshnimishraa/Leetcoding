@@ -104,40 +104,38 @@ class Solution
     //from left to right in Binary Tree.
     vector<int> topView(Node *root)
     {
-      vector<int> ans;
-      if(root == NULL)  {
-          return ans;
-          
-      }
-      map<int,int> topNode;
-      //queue store line and node
-      queue<pair<Node *,int>> q;
+        vector<int> ans;
+        if(root == NULL)  return ans;
+        map<int,int> mp;
+        queue<pair<Node*,int>> q;
+        q.push(make_pair(root,0));
+        while(!q.empty())
+    {
+    //take first node 
+    pair<Node*,int> temp = q.front();
+     q.pop();    
+    //take node and horizontal distance in queue 
+     Node* frontNode = temp.first;
+    // make second node as horizonal distance 
+    int hd = temp.second;
+
+if(mp.find(hd) == mp.end())
+      mp[hd] = frontNode->data;
       
-      q.push(make_pair(root,0));
-      
-      while(!q.empty()){
-          //take front node value 
-         pair<Node*,int> temp = q.front();
-              q.pop();
-         Node *frontNode = temp.first;
- 
-         int hd = temp.second;
-         
-// if one entry is present for HD then ignore others 
-if(topNode.find(hd) == topNode.end())
-         topNode[hd] = frontNode->data;
-         
-         if(frontNode->left != NULL)
-         //left me -ve hoga horizontal distance
-    q.push(make_pair(frontNode->left,hd-1));
+    //  search in left subtree from 0 to -1 , -2 ...
+    if(frontNode->left != NULL)
+     q.push(make_pair(frontNode->left,hd-1));
+     
     if(frontNode->right != NULL)
-    q.push(make_pair(frontNode->right,hd+1));
-         
-      }
-      for(auto i : topNode){
-          ans.push_back(i.second);
-      }
-      return ans;
+        q.push(make_pair(frontNode->right,hd+1));
+   
+  }
+  for(auto node : mp){
+      // in map store hd and node
+      ans.push_back(node.second);
+  }
+
+        return ans;
     }
 
 };
