@@ -4,37 +4,34 @@ using namespace std;
 
 // } Driver Code Ends
 class Solution {
-
   public:
     // Function to return Breadth First Traversal of given graph.
     vector<int> bfsOfGraph(int V, vector<int> adj[]) {
-//taking a visited array and Initially marked as 0
-
-int vis[V]={0};
-//In BFS,start with a “starting” node, mark it as visited,
-//and push it into the queue data structure.
-  vis[0] = 1;
-
-  queue<int> q;
-  q.push(0);  //push starting node
-  
- // store bfs traversal 
- vector<int> bfs;
-  while(!q.empty()){
-      int node = q.front();
-      q.pop();
-      
-     bfs.push_back(node);
+        int vis[V]={0};
      
-     for(auto it : adj[node]){
-         //check if previously visited that node
-         if(!vis[it]){
-             vis[it]=1;
-             q.push(it);
-         }
-     }
-  }
-  return bfs;
+     vis[0] = 1; //take root node
+     
+        vector<int> bfs;
+        queue<int> q;
+        q.push(0); // push root node in q
+        
+    while(!q.empty())
+    {
+        int front = q.front();
+        q.pop();
+    
+//push front node in bfs traversal 
+bfs.push_back(front);
+
+    for(auto it : adj[front]){
+        //pushing distinct entry in queue 
+        if(!vis[it]){
+     vis[it]=1;
+            q.push(it);
+        }
+    }
+    }
+    return bfs;
     }
 };
 
