@@ -26,7 +26,7 @@ int vis[V]={0};
       
      bfs.push_back(node);
      
-     for(s it : adj[node]){
+     for(auto it : adj[node]){
          //check if previously visited that node
          if(!vis[it]){
              vis[it]=1;
