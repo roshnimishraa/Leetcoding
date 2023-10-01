@@ -1,35 +1,27 @@
 class Solution {
 public:
     int minOperations(vector<int>& nums) {
-     int n=nums.size();
-        sort(nums.begin(),nums.end());
-        int count=1;
+        int n=nums.size();
         int ans=0;
-    for(int i=1;i<n;i++)
+        unordered_map<int,int> umap;
+    for(auto it : nums)
     {
-        if(nums[i] == nums[i-1])
-            count++;
-        
-        else{
-            if(count == 1) 
-                return -1;
-            
-    if(count % 3 == 0) 
-        ans += count/3;
-    
-            else 
-        ans += count/3 + 1;
-            count=1;
-            
-        }
-    } 
-       if(count == 1) return -1;
-if(count % 3 == 0)
-    ans += count/3;
-else 
-    ans += count/3 + 1;  
-         
-        
-    return ans;    
+        umap[it]++;
+    }
+    for(auto temp : umap)
+    {
+
+    if(temp.second == 1){
+        return -1;
+    }
+    int times = temp.second;
+     if(times % 3 == 0) {
+         ans += times/3;
+    }
+    else {
+        ans += times/3 + 1;
+    }
+    }
+        return ans;
     }
 };
