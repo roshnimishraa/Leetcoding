@@ -1,6 +1,9 @@
 class Solution {
 public:
     int minProcessingTime(vector<int>& processorTime, vector<int>& tasks) {
+//         TC : O(N LOG N)
+//         SC : O(N)
+        
         sort(processorTime.begin(),processorTime.end());
         sort(tasks.begin(),tasks.end());
         int n = tasks.size();
