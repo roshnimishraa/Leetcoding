@@ -1,17 +1,22 @@
 class Solution {
 public:
     int jump(vector<int>& nums) {
+        int n = nums.size();
+   //jump nums[i+j]
+ int i=0,lastJumpPos=0,maxReachable=0;
+    int jumpCount=0;
+    
+    while(lastJumpPos < n-1)
+    {
+        maxReachable = max(maxReachable,i+nums[i]);
         
-    int n=nums.size();
-    for(int i=1;i<n;i++){
-        nums[i] = max(i+nums[i],nums[i-1]);
+        if(i == lastJumpPos)
+        {
+            lastJumpPos = maxReachable;
+            jumpCount++;
+        }
+        i++;
     }
-    int count=0;
-        int index=0;
-    while(index<n-1){
-       count++;
-    index = nums[index];
-    }
-        return count;
+        return jumpCount;
     }
 };
