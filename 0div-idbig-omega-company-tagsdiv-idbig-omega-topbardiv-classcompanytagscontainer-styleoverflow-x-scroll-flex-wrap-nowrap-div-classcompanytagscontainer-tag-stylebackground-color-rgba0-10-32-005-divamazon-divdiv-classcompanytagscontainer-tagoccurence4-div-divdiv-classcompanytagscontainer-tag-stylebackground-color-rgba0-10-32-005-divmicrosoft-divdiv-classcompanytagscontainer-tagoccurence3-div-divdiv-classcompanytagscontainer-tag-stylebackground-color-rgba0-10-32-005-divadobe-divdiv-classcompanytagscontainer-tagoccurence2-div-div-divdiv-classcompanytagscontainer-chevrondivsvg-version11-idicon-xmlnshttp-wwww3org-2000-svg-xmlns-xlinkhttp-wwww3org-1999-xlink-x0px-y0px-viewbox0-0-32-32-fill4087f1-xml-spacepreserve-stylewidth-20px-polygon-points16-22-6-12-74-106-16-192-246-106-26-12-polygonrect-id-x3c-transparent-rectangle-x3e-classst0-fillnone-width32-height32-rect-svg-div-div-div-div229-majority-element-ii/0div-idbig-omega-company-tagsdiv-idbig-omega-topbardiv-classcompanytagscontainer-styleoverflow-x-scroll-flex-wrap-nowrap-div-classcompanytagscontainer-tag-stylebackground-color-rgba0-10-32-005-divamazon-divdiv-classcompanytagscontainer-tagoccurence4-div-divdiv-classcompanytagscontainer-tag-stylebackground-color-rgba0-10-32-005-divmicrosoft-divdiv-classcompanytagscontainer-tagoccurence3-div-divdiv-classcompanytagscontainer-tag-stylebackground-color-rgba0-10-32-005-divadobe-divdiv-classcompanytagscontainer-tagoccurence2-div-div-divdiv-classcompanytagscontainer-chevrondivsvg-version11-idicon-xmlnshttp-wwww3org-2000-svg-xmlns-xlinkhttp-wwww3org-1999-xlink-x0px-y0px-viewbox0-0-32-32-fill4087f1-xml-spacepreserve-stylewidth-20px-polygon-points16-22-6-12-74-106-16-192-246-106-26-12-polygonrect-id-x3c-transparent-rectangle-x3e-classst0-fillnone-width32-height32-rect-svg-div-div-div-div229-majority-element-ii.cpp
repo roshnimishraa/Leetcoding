@@ -1,65 +1,60 @@
 class Solution {
 public:
     vector<int> majorityElement(vector<int>& nums) {
-      
-        int n=nums.size();
+        int n = nums.size();
         int count1=0;
-           int count2=0; 
-        int mja1=NULL;
-        int mja2 = NULL;
-vector<int> ans;
-   for(int i=0;i<n;i++)
+        int count2 =0;
+        int ele1,ele2;
+        
+    for(int i=0;i<n;i++)
     {
-  if(nums[i] == mja1){
-            count1++;
-        }
-      
-     else if(nums[i] == mja2)
+ if(nums[i] == ele1)
+    {
+        count1++;
+    }
+          else if(nums[i] == ele2)
         {
-           count2++;
+            count2++;
         }
-       
-       
-       else if(count1 == 0)
+      else if(count1 == 0)
         {
-        mja1 = nums[i];
-             count1 =1;
+           count1=1;
+            ele1=nums[i];
         }
-       
-         else if(count2 == 0)
-        {
-            mja2=nums[i];
+        else if(count2 == 0){
             count2=1;
-        } 
+            ele2 = nums[i];
+        }
+  
       
-        else { 
-        count1--;
+        else{
+            count1--;
             count2--;
         }
     }
-     
-     int freq1=0,freq2=0;
-         int countMajority = n/3;
-    for(auto it : nums)
+        
+    vector<int> ans;
+        int freq1=0,freq2=0;
+        int countMajority = n/3;
+    for(int i=0;i<n;i++)
     {
-    if(mja1 == it)
-    {
-        freq1++;
+        if(ele1==nums[i])
+        {
+            freq1++;
+        }
+        else if(ele2 == nums[i])
+        {
+  freq2++;
+        }
     }
-    else if(mja2 == it)
-    {
-        freq2++;
-    }
-   
-    }
-         if(freq1 > countMajority)
-         {
-        ans.push_back(mja1);
-         }
-         if(freq2 > countMajority)
-         {
-        ans.push_back(mja2);
-         }
+        
+        if(freq1 > countMajority ){
+            ans.push_back(ele1);
+        }
+        if(freq2 > countMajority)
+        {
+            ans.push_back(ele2);
+        }
         return ans;
     }
 };
