@@ -13,7 +13,7 @@ class Solution {
     string getSubTreeString(TreeNode* root, unordered_map<string,int> &ump,   vector<TreeNode*> &res)
     {
         if(root == NULL) {
-            return "NULL";
+            return "N";
         }
  string s = to_string(root->val) + "," +  getSubTreeString(root->left,ump,res) + "," + getSubTreeString(root->right,ump,res);
         
