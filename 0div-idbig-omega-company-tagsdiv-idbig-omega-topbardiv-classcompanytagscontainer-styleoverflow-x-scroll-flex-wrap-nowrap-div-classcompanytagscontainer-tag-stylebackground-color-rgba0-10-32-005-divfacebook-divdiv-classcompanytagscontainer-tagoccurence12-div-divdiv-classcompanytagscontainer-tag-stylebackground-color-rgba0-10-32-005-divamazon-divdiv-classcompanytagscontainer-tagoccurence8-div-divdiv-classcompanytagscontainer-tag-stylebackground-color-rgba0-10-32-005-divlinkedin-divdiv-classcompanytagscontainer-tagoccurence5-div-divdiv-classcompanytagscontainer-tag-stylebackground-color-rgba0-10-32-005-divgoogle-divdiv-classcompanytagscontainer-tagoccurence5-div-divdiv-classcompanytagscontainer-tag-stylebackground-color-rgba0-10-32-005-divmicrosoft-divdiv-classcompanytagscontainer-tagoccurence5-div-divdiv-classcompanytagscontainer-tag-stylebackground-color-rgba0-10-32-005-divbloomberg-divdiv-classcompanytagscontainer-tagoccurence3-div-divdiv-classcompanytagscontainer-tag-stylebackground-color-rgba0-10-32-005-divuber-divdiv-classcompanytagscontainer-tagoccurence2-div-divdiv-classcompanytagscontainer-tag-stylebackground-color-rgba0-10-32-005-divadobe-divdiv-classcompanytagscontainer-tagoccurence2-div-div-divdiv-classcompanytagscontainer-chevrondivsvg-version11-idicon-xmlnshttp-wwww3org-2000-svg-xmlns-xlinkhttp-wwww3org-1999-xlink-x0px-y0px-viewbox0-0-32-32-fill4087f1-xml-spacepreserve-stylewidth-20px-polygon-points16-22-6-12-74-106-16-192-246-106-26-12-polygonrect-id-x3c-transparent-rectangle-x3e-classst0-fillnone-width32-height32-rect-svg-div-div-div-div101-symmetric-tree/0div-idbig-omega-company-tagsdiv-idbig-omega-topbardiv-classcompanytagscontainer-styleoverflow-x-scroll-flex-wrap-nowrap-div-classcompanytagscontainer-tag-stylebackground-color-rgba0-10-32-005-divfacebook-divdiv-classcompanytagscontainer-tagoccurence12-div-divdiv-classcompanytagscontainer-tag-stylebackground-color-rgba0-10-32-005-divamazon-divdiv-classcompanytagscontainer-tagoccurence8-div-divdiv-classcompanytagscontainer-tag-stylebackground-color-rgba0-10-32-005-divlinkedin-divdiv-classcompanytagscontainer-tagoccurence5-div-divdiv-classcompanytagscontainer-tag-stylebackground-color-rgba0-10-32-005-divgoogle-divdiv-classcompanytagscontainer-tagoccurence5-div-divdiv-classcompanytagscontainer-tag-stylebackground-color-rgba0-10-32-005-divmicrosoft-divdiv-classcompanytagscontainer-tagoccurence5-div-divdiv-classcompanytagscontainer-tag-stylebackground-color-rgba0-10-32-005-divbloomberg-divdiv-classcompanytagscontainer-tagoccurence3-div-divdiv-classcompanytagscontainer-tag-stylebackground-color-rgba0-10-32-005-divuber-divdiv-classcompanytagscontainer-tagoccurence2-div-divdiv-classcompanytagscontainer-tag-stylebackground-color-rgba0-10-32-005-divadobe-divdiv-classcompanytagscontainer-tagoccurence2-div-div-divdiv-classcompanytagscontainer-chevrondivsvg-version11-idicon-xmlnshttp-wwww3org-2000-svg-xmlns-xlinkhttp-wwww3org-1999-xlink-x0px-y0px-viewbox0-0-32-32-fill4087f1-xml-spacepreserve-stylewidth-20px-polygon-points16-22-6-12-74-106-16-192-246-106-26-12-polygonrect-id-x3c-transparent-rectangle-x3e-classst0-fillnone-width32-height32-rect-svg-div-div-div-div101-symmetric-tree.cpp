@@ -10,16 +10,25 @@
  * };
  */
 class Solution {
-    bool helper(TreeNode* left,TreeNode* right)
-    {
-if(left == NULL || right == NULL) return left == right;
-        
-    if(left -> val != right->val)  return false;
-    
-    return helper(left->left,right->right) && helper(left->right,right->left);
-    }
 public:
+bool helper(TreeNode* left,TreeNode* right)
+{
+
+if(left == NULL && right == NULL) {
+    return true;
+}
+if(left == NULL || right == NULL){
+    return false;
+}
+if(left->val != right -> val){
+    return false;
+}    
+    
+//comparing left subtree's left child with right subtree's right child --//AND-- comparing left subtree's right child with right subtree's
+//left child
+return helper(left->left,right->right) && helper(left->right,right->left);
+}
     bool isSymmetric(TreeNode* root) {
-        return (root == NULL || helper(root->left,root->right));
+    return (root == NULL || helper(root->left,root->right));
     }
 };
