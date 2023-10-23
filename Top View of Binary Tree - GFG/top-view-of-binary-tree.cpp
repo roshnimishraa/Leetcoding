@@ -104,38 +104,41 @@ class Solution
     //from left to right in Binary Tree.
     vector<int> topView(Node *root)
     {
-        vector<int> ans;
-        if(root == NULL)  return ans;
-        map<int,int> mp;
-        queue<pair<Node*,int>> q;
-        q.push(make_pair(root,0));
-        while(!q.empty())
-    {
-    //take first node 
-    pair<Node*,int> temp = q.front();
-     q.pop();    
-    //take node and horizontal distance in queue 
-     Node* frontNode = temp.first;
-    // make second node as horizonal distance 
-    int hd = temp.second;
-// if it does not exists
-if(mp.find(hd) == mp.end())
-      mp[hd] = frontNode->data;
-      
-    //  search in left subtree from 0 to -1 , -2 ...
-    if(frontNode->left != NULL)
-     q.push(make_pair(frontNode->left,hd-1));
-     
-    if(frontNode->right != NULL)
-        q.push(make_pair(frontNode->right,hd+1));
-   
+  vector<int> ans;
+  if(root == NULL) {
+      return ans;
   }
-  for(auto node : mp){
-      // in map store hd and node
-      ans.push_back(node.second);
-  }
+  //store (hd,node) in map
+ map<int ,int > mp;
+ //store (node,hd) in queue 
+ queue<pair<Node*,int>> q;
+ q.push({root,0});
+ while(!q.empty()){
+     auto it = q.front();
+     q.pop();
+  Node* node = it.first;
+     int hd = it.second;
+    
+//if in map one value is present for a hd then do nothing
+// if node does not exist in map
+if(mp.find(hd) == mp.end()){
+// add hd and node in map 
+mp[hd] = node->data;
+}
 
-        return ans;
+if(node->left != NULL){
+    q.push({node->left,hd-1});
+}
+if(node->right != NULL) {
+    q.push({node->right,hd+1});
+}
+ }
+ //take ans from map 
+ for(auto i : mp){
+// i-> ({node,hd}) -> I want node
+ans.push_back(i.second);
+ }
+ return ans;
     }
 
 };
