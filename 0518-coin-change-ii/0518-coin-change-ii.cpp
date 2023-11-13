@@ -1,28 +1,34 @@
+
 class Solution {
-    
 public:
-    int t[301][50001];
-    int solve(int index,vector<int> coins,int amount)
-    {
-        if(amount == 0) return 1;
-        int n= coins.size();
-        if(index == n) return 0;
-    
-        if(t[index][amount] != -1) return t[index][amount];
-// skip 
-        if(coins[index] > amount) {
-//      skip
-   return t[index][amount]=solve(index+1,coins,amount);
-        }
-//    take 
-  int take =  solve(index,coins,amount-coins[index]);
-//     skip 
-int skip =    solve(index+1,coins,amount);
-        return t[index][amount] = take+skip;
-    }
     int change(int amount, vector<int>& coins) {
-        int n=coins.size();
-     memset(t,-1,sizeof(t));
-        return solve(0,coins,amount);
+        int n = coins.size();
+        int t[n+1][amount+1];
+    
+//initialization 
+for(int i=0;i<n+1;i++){
+    for(int j=0;j<amount+1;j++){
+if(i == 0){
+    t[i][j] = 0; 
+}
+if(j==0){
+    t[i][j] = 1;
+}
+}
+}
+
+for(int i=1;i<n+1;i++){
+    for(int j=1;j<amount+1;j++){
+    if(coins[i-1] <= j){
+// Total no. of ways that make up that amount
+t[i][j] = t[i][j-coins[i-1]] + t[i-1][j];
+    }
+else{
+    t[i][j] = t[i-1][j];
+}
+}
+}
+
+return t[n][amount];
     }
 };
