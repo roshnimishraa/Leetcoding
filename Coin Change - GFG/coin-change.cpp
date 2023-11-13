@@ -6,28 +6,26 @@ using namespace std;
 class Solution {
   public:
     long long int count(int coins[], int n, int sum) {
-long long int t[n+1][sum+1];
-
+ long long int  t[n+1][sum+1];
 //initialization 
-for(int i=0;i<n+1;i++){
+for(int i =0;i<n+1;i++){
     for(int j=0;j<sum+1;j++){
-        if(i== 0){
+        if(i==0){
             t[i][j] = 0;
         }
-    if(j == 0){
-        t[i][j] = 1;
-    }
+        if(j==0){
+            t[i][j] = 1;
+        }
     }
 }
-
 for(int i=1;i<n+1;i++){
     for(int j=1;j<sum+1;j++){
-    if(coins[i-1] <= j){
-    // find maximum number of ways
+        if(coins[i-1] <= j){
+    // no. of ways so that sum equal to given sum
 t[i][j] = t[i][j-coins[i-1]] + t[i-1][j];
-    }
+        }
     else{
-        t[i][j] = t[i-1][j];
+        t[i][j] = t[i-1][j] ;
     }
     }
 }
