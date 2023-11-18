@@ -14,8 +14,10 @@ void helper(int n,string output,int lastdigit,vector<string> &ans){
         ans.push_back(output);
         return;
     }
-    
+    // append 0
     helper(n-1,output+"0",0,ans);
+    
+    // append 1 if the last digit is 0 
     if(lastdigit == 0){
         helper(n-1,output+"1",1,ans);
     }
