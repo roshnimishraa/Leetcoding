@@ -9,6 +9,7 @@ public:
 bool isSafe(int node,int color[],bool graph[101][101],int col,int n)
 {
     for(int i=0;i<n;i++){
+        // graph[i][node] means it is adjacent node
     if(i != node && graph[i][node]==1 && color[i]==col){
         return false;
     }
