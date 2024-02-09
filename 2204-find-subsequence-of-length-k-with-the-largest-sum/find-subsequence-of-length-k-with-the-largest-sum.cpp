@@ -1,25 +1,30 @@
 class Solution {
 public:
-    vector<int> maxSubsequence(vector<int>& nums, int k) {
-        int n = nums.size();
+   vector<int> maxSubsequence(vector<int>& nums, int k) {
+		// Declare variables
+        int n = nums.size(), i = 0, t = k;
+		// Answer Array
         vector<int> ans;
-if(n == k) return nums;
-priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
-for(int i=0;i<n;i++){
-    pq.push({nums[i],i});
-
-if(pq.size() > k) pq.pop();
-}
-priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq1;
-while(!pq.empty())
-{
-    pq1.push({pq.top().second,pq.top().first});
-    pq.pop();
-}
-while(!pq1.empty()){
-    ans.push_back(pq1.top().second);
-    pq1.pop();
-}
-return ans;
+		
+		// Put first k elements
+        while(t>0){
+            ans.push_back(nums[i]);
+            i++;
+            t--;
+        }
+		
+		//Loop Through Remaining Array
+        for(int j=i;j<n;j++)
+        {
+			// Calcualate minimum from ans array 
+            int mini = min_element(ans.begin(), ans.end()) - ans.begin();
+			// Comapre it with the current element
+            if(ans[mini] < nums[j]){
+                ans.erase(ans.begin()+mini);
+                ans.push_back(nums[j]);
+            }
+            
+        }
+        return ans;
     }
 };
