@@ -20,7 +20,27 @@ return dp[index][target]=(take+notTake);
 public:
     int change(int amount, vector<int>& coins) {
 int n = coins.size();
-vector<vector<int>> dp(n,vector<int>(amount+1,-1));
-return helper(n-1, amount, coins,dp);    
+vector<vector<int>> dp(n,vector<int>(amount+1,0));
+// base case 
+// target == 0
+for(int tar=0;tar<=amount;tar++)
+{
+dp[0][tar] = (tar % coins[0]==0);
+}
+
+for(int i=1;i<n;i++)
+{
+for(int tar=0;tar<=amount;tar++)
+{
+int notTake =dp[i-1][tar];
+int take=0;
+if(coins[i]<=tar){
+    take = dp[i][tar-coins[i]];
+}
+
+dp[i][tar] = take+notTake;
+}
+}
+return dp[n-1][amount];
     }
 };
