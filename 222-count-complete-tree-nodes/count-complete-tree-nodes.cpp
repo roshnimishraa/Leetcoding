@@ -10,18 +10,36 @@
  * };
  */
 class Solution {
-    void inorder(TreeNode* root,int &count)
-    {
-if(root==NULL) return;
-count++;
-inorder(root->left,count);
-inorder(root->right,count);
-
-    }
+    private:
+int leftHeight(TreeNode* root)
+{
+int height=0;
+while(root!=NULL)
+{
+    height++;
+    root = root->left;
+}
+return height;
+}
+int rightHeight(TreeNode* root)
+{
+int height=0;
+while(root != NULL)
+{
+    height++;
+    root = root->right;
+}
+return height;
+}
 public:
     int countNodes(TreeNode* root) {
-    int count=0;   
-inorder(root,count);
-return count;
+  int lh = leftHeight(root);
+  int rh = rightHeight(root);
+// complete tree 
+if(lh == rh) 
+// no. of nodes 2^h-1
+return (1<<lh)-1; //return pow(2,lh)-1
+
+return 1+countNodes(root->left)+countNodes(root->right);
     }
 };
