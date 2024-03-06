@@ -24,8 +24,8 @@ public:
     int next() {
         TreeNode* tempNode = st.top();
         st.pop();
-        pushAll(tempNode->right);
-        return tempNode->val;
+    pushAll(tempNode->right);
+    return tempNode->val;
     }
     
     bool hasNext() {
