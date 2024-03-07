@@ -11,12 +11,11 @@
  */
 class Solution {
 public:
-    vector<int> inorderTraversal(TreeNode* root)
-    {
-    vector<int> ans;
-    TreeNode* curr = root;
-    while(curr!=NULL)
-    {
+    vector<int> inorderTraversal(TreeNode* root) {
+TreeNode* curr =root;
+vector<int> ans;
+while(curr != NULL)
+{
     if(curr->left == NULL)
     {
         ans.push_back(curr->val);
@@ -24,9 +23,9 @@ public:
     }
     else{
 TreeNode* leftChild = curr->left;
-while(leftChild->right!=NULL && leftChild->right != curr)
+while(leftChild->right != NULL && leftChild->right!=curr)
 {
-    leftChild  = leftChild->right;
+    leftChild = leftChild->right;
 }
 if(leftChild->right == NULL)
 {
@@ -38,8 +37,8 @@ else{
     ans.push_back(curr->val);
     curr = curr->right;
 }
-    }
-    }
-    return ans;
-    }
+}
+} 
+return ans;       
+}
 };
