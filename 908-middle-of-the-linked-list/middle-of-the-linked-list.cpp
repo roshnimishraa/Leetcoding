@@ -10,9 +10,7 @@
  */
 class Solution {
 public:
-    ListNode* middleNode(ListNode* head) {
-    if(head == NULL || head->next == NULL)
-    return head;
+    ListNode* middleNode(ListNode* head) {   
         ListNode* fast = head;
         ListNode* slow=head;
 // fast == null for even length LL
