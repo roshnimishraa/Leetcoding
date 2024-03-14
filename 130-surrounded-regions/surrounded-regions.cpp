@@ -65,7 +65,7 @@ for(int i=0;i<n;i++)
         floodFill(i,m-1,'_','O',board);
     }
 }
-// convert all remaining '_' to 'O'
+// convert all remaining '_' to 'X'
 for(int i=0;i<n;i++)
 {
     for(int j=0;j<m;j++)
