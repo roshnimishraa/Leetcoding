@@ -7,21 +7,6 @@
  * };
  */
 class Solution {
-private:
- ListNode *collisionPoint(ListNode* t1,ListNode* t2,int diff)
-{
-    while(diff)
-    {
-        diff--;
-        t2 = t2->next;
-    }
-    while(t1!=t2)
-    {
-        t1 = t1->next;
-        t2 = t2->next;
-    }
-    return t1;
-}
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) 
 {
