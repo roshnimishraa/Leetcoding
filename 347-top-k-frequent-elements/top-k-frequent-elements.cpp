@@ -1,21 +1,27 @@
 class Solution {
 public:
+static bool compare(pair<int,int> p1,pair<int,int> p2)
+{
+      // Sort on the basis of decreasing order
+    // of frequencies
+    return p1.second > p2.second;
+}
+
     vector<int> topKFrequent(vector<int>& nums, int k) {
-        unordered_map<int,int> mp;
-        for(auto it:nums)
-        {
-            mp[it]++;
-        }
-    priority_queue<pair<int,int>> pq;
+     vector<int> ans;
+    unordered_map<int,int> mp;
+for(auto it:nums){
+    mp[it]++;
+}   
+vector<pair<int,int>> vec;
 for(auto it:mp)
 {
-    pq.push({it.second,it.first});
+    vec.push_back({it.first,it.second});
 }
-   vector<int>  ans;
-while(!pq.empty() && k--)
+sort(vec.begin(),vec.end(),compare);
+for(int i=0;i<k;i++)
 {
- ans.push_back(pq.top().second);
- pq.pop();
+ans.push_back(vec[i].first);
 }
 return ans;
     }
