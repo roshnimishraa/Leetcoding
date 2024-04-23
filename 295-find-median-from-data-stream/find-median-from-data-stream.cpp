@@ -1,43 +1,64 @@
 class MedianFinder {
-    private:
-priority_queue<int> left_max_heap;
-priority_queue<int,vector<int>,greater<int>> right_min_heap;
-
+    priority_queue<int> maxHeap;
+    priority_queue<int,vector<int>,greater<int>> minHeap;
+  
 public:
     MedianFinder() {
         
     }
     
     void addNum(int num) {
-  if(left_max_heap.empty() || num<left_max_heap.top())
+       if(maxHeap.empty() && minHeap.empty()) 
+       {
+        maxHeap.push(num);
+       }
+       else{
+        if(maxHeap.top() < num)
         {
-            left_max_heap.push(num);
+            minHeap.push(num);
         }
         else{
-            right_min_heap.push(num);
+            maxHeap.push(num);
         }
-if(abs((int)left_max_heap.size()-(int)right_min_heap.size()) > 1)
-  {
- right_min_heap.push(left_max_heap.top());
-left_max_heap.pop();
- }
- else if(left_max_heap.size()<right_min_heap.size())
- {
-     left_max_heap.push(right_min_heap.top());
-     right_min_heap.pop();
- }
+       }
+  int n = maxHeap.size();
+ int m = minHeap.size();
+      
+// check heap is balanced or not (heapify)
+if(n-m == 2 || n-m == -2)
+{
+    if(n > m)
+    {
+        int element = maxHeap.top();
+          maxHeap.pop();
+        minHeap.push(element);
+      
+    }
+    else{
+        int element = minHeap.top();
+          minHeap.pop();
+        maxHeap.push(element);
+   }
+}
     }
     
     double findMedian() {
- if(left_max_heap.size() == right_min_heap.size())    
+          int n = maxHeap.size();
+        int m = minHeap.size();
+      
+//  if n+m is even 
+if( (n+m) % 2 == 0)
 {
-double mean=((double)left_max_heap.top()+(double)right_min_heap.top())/2;
- return mean;
+return ((double)(maxHeap.top()+(double)minHeap.top()))/2.0;
 }
-else{
-    return left_max_heap.top();
+// if n+m is odd return heap.top() which has greater elements
+if(n > m)
+{
+    return maxHeap.top();
 }
-    }
+   return minHeap.top();
+
+ }
 };
 
 /**
