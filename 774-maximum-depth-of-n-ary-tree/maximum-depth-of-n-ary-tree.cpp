@@ -21,13 +21,23 @@ public:
 class Solution {
 public:
     int maxDepth(Node* root) {
-     if(root == NULL) 
-     return 0;
-     int maxi = 0;
-     for(auto child:root->children)
-     {
-        maxi = max(maxi, maxDepth(child));
-     }   
-     return maxi+1;
+        int maxi=0, breadth;
+        queue<Node*> q;
+        if(root) q.push(root);
+        while(!q.empty())
+        {
+            breadth=q.size();
+            maxi++;
+            for(int i=0;i<breadth;i++)
+            {
+                root=q.front();
+                q.pop();
+            for(auto child:root->children)
+            {
+                q.push(child);
+            }
+            }
+        }
+        return maxi;
     }
 };
