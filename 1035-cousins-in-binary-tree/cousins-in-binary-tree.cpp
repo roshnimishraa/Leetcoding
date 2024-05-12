@@ -32,6 +32,7 @@ while(n--)
     }
     if(curr->left!=NULL && curr->right!=NULL)
     {
+//  // x & y are there in tree, both have same parent curr, return false
 if((curr->left->val == x && curr->right->val==y) ||
 (curr->left->val == y && curr->right->val == x))
 {
