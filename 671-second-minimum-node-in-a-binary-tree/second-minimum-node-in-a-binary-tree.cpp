@@ -10,20 +10,19 @@
  * };
  */
 class Solution {
-    void inorder(TreeNode* root, set<int> &st)
+    void solve(TreeNode* root,int &value,long long &ans)
     {
-        if(root == NULL) return;
-inorder(root->left,st);
-st.insert(root->val);
-inorder(root->right,st);
+    if(root == NULL) return;
+if(root->val!=value && root->val<ans)
+ans =root->val;
+solve(root->left,value,ans);
+solve(root->right,value,ans);
     }
 public:
     int findSecondMinimumValue(TreeNode* root) {
-            set<int> st;
-         inorder(root,st);
-    if(st.size()<2) return -1;
-  auto it = st.begin();
-  it++;
-   return *it;
+        long long ans = LONG_MAX;
+        int value = root->val;
+    solve(root,value,ans);
+    return ans!=LONG_MAX ? ans : -1;
     }
 };
