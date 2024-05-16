@@ -1,27 +1,22 @@
 class Solution {
 public:
     int balancedStringSplit(string s) {
-      stack<char> st;
-      int count=0;
-      for(int i=0;i<s.length();i++)
-      {
-        if(st.empty() || s[i]==st.top())
+        int count=0;
+        int balance=0;
+    for(auto it:s)
+    {
+        if(it=='L')
         {
-            st.push(s[i]);
+            balance++;
         }
-    else{
-        if(!st.empty() && st.top()!=s[i])
-        {
-            st.pop();
+        else{
+            balance--;
         }
-//check if the stack is empty , if yes then
-// increment the count by 1
-        if(st.empty())
+        if(balance==0)
         {
             count++;
         }
     }
-      }
-      return count;  
+    return count;
     }
 };
