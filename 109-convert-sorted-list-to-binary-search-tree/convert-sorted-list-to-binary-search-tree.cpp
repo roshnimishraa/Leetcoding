@@ -20,24 +20,25 @@
  * };
  */
 class Solution {
-    TreeNode* solve(vector<int> &v,int left,int right)
-    {
-        if(left > right) return NULL;
-        int mid = left+(right-left)/2;
-    TreeNode* node =new TreeNode (v[mid]);
-    node->left = solve(v,left,mid-1);
-    node->right = solve(v,mid+1,right);
-    return node;
-    }
 public:
     TreeNode* sortedListToBST(ListNode* head) {
-        vector<int> v;
-        while(head!=NULL)
-        {
-            v.push_back(head->val);
-           head = head->next;
-        }
-        return solve(v,0,v.size()-1);
-
+        if(head == NULL) return NULL;
+    if(head->next ==  NULL) 
+    return new TreeNode(head->val);
+    ListNode* slow =head;
+    ListNode* fast = head;
+    ListNode* slow_prev = NULL;
+    while(fast!=NULL && fast->next!=NULL)
+    {
+        slow_prev = slow;
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    // slow -> points to mid 
+    TreeNode* node = new TreeNode(slow->val);
+    slow_prev->next = NULL;
+  node->left = sortedListToBST(head);
+  node->right = sortedListToBST(slow->next);
+  return node;
     }
 };
