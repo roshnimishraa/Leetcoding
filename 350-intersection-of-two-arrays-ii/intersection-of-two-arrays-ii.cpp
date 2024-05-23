@@ -1,20 +1,23 @@
 class Solution {
 public:
     vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
-         vector<int> ans;
-         vector<int> vis(nums2.size(),0);
+        vector<int> ans;
+        map<int,int> mp;
         for(int i=0;i<nums1.size();i++)
         {
-            for(int j=0;j<nums2.size();j++)
-            {
-                if(nums1[i]==nums2[j] && vis[j]==0)
-                {
-                    ans.push_back(nums2[j]);
-                    vis[j]=1;
-                    break;
-                }
-            }
-
+            mp[nums1[i]]++;
+        }
+        for(int i=0;i<nums2.size();i++)
+        {
+            int key=nums2[i];
+            auto it = mp.find(key);
+    // if nums2 is present in map 
+    // then decrement the count
+    if(it != mp.end() && it->second>0) 
+    {
+          ans.push_back(nums2[i]);
+          it->second--;
+    }
         }
         return ans;
     }
