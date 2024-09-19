@@ -15,28 +15,30 @@ public:
     return false;
  }
 int target = sum/2;;
-vector<vector<bool>> dp(n,vector<bool>(target+1,0));
-for(int index=0;index<n;index++)
-{
-    dp[index][0] = true;
-}
-if(nums[0]<=target)
-{
- dp[0][nums[0]]=true;
-}
+vector<bool> prev(target+1, false);
+vector<bool> curr(target+1, false);
+
+prev[0] = curr[0]=true;
+   if (nums[0] <= target)
+   {
+  prev[nums[0]] = true;
+   }
+   
+
 for(int index=1;index<n;index++)
 {
     for(int k=1;k<=target;k++)
     {
-        bool notTake = dp[index-1][k];
+        bool notTake = prev[k];
         bool take=false;
         if(k>= nums[index])
         {
-            take = dp[index-1][k-nums[index]];
+            take = prev[k-nums[index]];
         }
-        dp[index][k] = take || notTake;
+        curr[k] = take || notTake;
     }
+    prev = curr;
 }
-return dp[n-1][target];
+return prev[target];
     }
 };
