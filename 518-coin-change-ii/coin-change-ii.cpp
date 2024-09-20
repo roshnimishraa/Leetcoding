@@ -1,28 +1,33 @@
 class Solution {
     private:
-    int solve(int index, int amount, vector<int> &coins,
-    vector<vector<int>> &dp)
+    int solve(int amount, vector<int> &coins)
     {
-        if(index == 0)
+        int n = coins.size();
+   vector<vector<int>> dp(n, vector<int> (amount+1, 0));
+   
+  for(int tar=0;tar<=amount;tar++)
+  {
+     if(tar % coins[0] == 0){
+        dp[0][tar] = 1;
+     }
+  }
+  for(int index=1;index<n;index++)
+  {
+    for(int tar=0;tar<=amount;tar++)
+    {
+        int notTake = dp[index-1][tar];
+        int take=0;
+        if(coins[index] <= tar)
         {
-            return amount % coins[0] == 0;
- }
- if(dp[index][amount] != -1){
-    return dp[index][amount];
- }
-    int notTake = solve(index-1, amount, coins,dp);
-    int take=0;
-    if(coins[index] <= amount)
-    {
-        take = solve(index, amount-coins[index], coins,dp);
+            take = dp[index][tar-coins[index]];
+        }
+        dp[index][tar] = take+notTake;
     }
-    return dp[index][amount]= take+notTake;
-    
+  }
+  return dp[n-1][amount];
     }
 public:
     int change(int amount, vector<int>& coins) {
-        int n=coins.size();
-    vector<vector<int>> dp(n, vector<int>(amount+1, -1));
-        return solve(n-1, amount, coins,dp);
+     return solve(amount,coins);
     }
 };
