@@ -4,32 +4,31 @@ int solve(string text1, string text2)
 {
     int n =text1.size();
     int m = text2.size();
-    vector<vector<int>> dp(n+1, vector<int> (m+1, 0));
-
-// base case -> i<0 || j<0 but in tabulation dp[-1] is unreachable
-// Therefore do shifting of index in order to write tabulation 
-// now the base case acc. to tab. if(i==0 || j==0) 
- for(int i=0;i<=n;i++)
+ vector<int> prev(m+1, 0);
+ vector<int> curr(m+1, 0);
+ for(int j=0;j<=m;j++)
  {
-   dp[i][0] = 0;
+   prev[j] = 0;
  }
- for(int i=0;i<=m;i++)
- {
-    dp[0][i] = 0;
- }
+//  there is no need of column
+//  for(int i=0;i<=n;i++)
+//  {
+//     dp[i][0] = 0;
+//  }
  for(int index1=1;index1<=n;index1++)
  {
     for(int index2=1;index2<=m;index2++)
     {
         // matching 
         if(text1[index1-1] == text2[index2-1])
-    dp[index1][index2] = 1+dp[index1-1][index2-1];
+   curr[index2] = 1+prev[index2-1];
     // not matching 
     else
-    dp[index1][index2] = 0 + max(dp[index1-1][index2], dp[index1][index2-1]);
+  curr[index2] = 0 + max(prev[index2], curr[index2-1]);
     }
+    prev = curr;
  }
- return dp[n][m];
+ return prev[m];
 }
 public:
     int longestCommonSubsequence(string text1, string text2) {
