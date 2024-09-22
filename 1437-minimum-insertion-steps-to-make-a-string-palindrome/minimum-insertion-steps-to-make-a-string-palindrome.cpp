@@ -1,39 +1,32 @@
 class Solution {
-public:
-int longestPalindromicSubsequence(string s)
-{
-    int n = s.length();
-string t = s;
-reverse(t.begin(),t.end());
-vector<vector<int>> dp(n+1,vector<int>(n+1,0));
-// base case 
-for(int i=0;i<n+1;i++)
-{
-dp[i][0] = 0;
-}
-for(int j=0;j<n+1;j++)
-{
-dp[0][j] = 0;
-}
+       int lps(string s, string t)
+    {
+        int n = s.length(), m = t.length();
+   vector<int> prev(m+1, 0);
+   vector<int> curr(m+1,0);
 
-for(int i=1;i<n+1;i++)
-{
-for(int j=1;j<n+1;j++)
-{
-if(s[i-1] == t[j-1])
-{
-dp[i][j] = 1 + dp[i-1][j-1];
-}
-else{
-    dp[i][j] = 0+max(dp[i-1][j] , dp[i][j-1]);
-}
-}
-}
-return dp[n][n];
-}
+    for(int index1=1;index1<=n; index1++)
+    {
+        for(int index2=1; index2<=m; index2++)
+        {
+            // matching 
+        if(s[index1-1] == t[index2-1])
+            curr[index2] =1+ prev[index2-1];
+       else
+       curr[index2] = 0+max(prev[index2], curr[index2-1]);
+
+        }
+prev = curr;
+    }
+    int lpsLen =  prev[m];
+    int ans = n-lpsLen;
+    return ans;
+    }
+public:
     int minInsertions(string s) {
-  int lps = longestPalindromicSubsequence(s);
-int ans = s.length() - lps;
-return ans;      
+    string t = s;
+    int n = s.length(), m = t.length();
+    reverse(t.begin(), t.end());
+return lps(s,t);
     }
 };
