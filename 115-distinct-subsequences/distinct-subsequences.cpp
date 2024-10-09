@@ -1,34 +1,29 @@
 class Solution {
     private:
-    int helper(int ind1, int ind2, string &s, string &t,vector<vector<int>> &dp)
+  int mod = 1e9;
+    int helper(string s, string t)
     {
-        if(ind1 < 0 && ind2 < 0){
-            return 1;
+        int n = s.length();
+        int m = t.length();
+      vector<int> prev(m+1,0);
+      vector<int> curr(m+1,0);
+
+     prev[0] = curr[0] = 1;
+        for(int i=1 ; i<=n ; i++){
+            for(int j=1 ; j<=m ; j++){
+                if(s[i-1] == t[j-1]){
+                curr[j] = (prev[j-1]%mod + prev[j]%mod)%mod;
+                }else{
+                    curr[j] = prev[j];
+                }
+            }
+            prev = curr;
         }
-        if(ind1<0){
-            return 0; // all the char in t doesn't match
-        }
-        if(ind2<0){
-            return 1;
-        }
-    if(dp[ind1][ind2] != -1){
-        return dp[ind1][ind2];
-    }
-        // match
-        if(s[ind1] == t[ind2])
-        {
-            // take + notTake that index look for another
-        return dp[ind1][ind2] = helper(ind1-1,ind2-1, s,t,dp)+helper(ind1-1,ind2,s,t,dp);
-        }
-  
-return dp[ind1][ind2] = helper(ind1-1,ind2,s,t,dp);
-  
+        return prev[m]%mod;
     }
 public:
     int numDistinct(string s, string t) {
-        int n = s.length();
-        int m = t.length();
-    vector<vector<int>> dp(n,vector<int>(m,-1));
-        return helper(n-1,m-1,s,t,dp);
+      
+  return helper(s,t);
     }
 };
