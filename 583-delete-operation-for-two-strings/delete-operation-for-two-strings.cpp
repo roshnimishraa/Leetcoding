@@ -1,30 +1,42 @@
 class Solution {
     private:
-    int lcs(int ind1, int ind2, string &s1, string &s2, vector<vector<int>> &dp)
+    int lcs(string &s1, string &s2)
     {
-        if(ind1 <0 || ind2<0)
+         int n = s1.size();
+        int m =s2.size();
+        vector<vector<int>> dp(n+1, vector<int> (m+1,0));
+
+   for(int j=0; j<=m; j++)
+   {
+    dp[0][j] = 0;
+   }
+   for(int i=0; i<=n; i++)
+   {
+    dp[i][0] = 0;
+   }
+   for(int ind1=1;ind1<=n; ind1++)
+   {
+    for(int ind2=1; ind2<=m; ind2++)
+    {
+             // match
+        if(s1[ind1-1] == s2[ind2-1])
         {
-            return 0;
-        }
-        if(dp[ind1][ind2] != -1){
-            return dp[ind1][ind2];
-        }
-        // match
-        if(s1[ind1] == s2[ind2])
-        {
-        return dp[ind1][ind2] = 1+lcs(ind1-1, ind2-1, s1,s2,dp);
+         dp[ind1][ind2] = 1+dp[ind1-1][ind2-1];
         }
 
-        // not match 
-        return dp[ind1][ind2] = 0+ max(lcs(ind1,ind2-1,s1,s2,dp), lcs(ind1-1,ind2, s1, s2,dp));
+       else
+         dp[ind1][ind2] = 0+ max(dp[ind1-1][ind2], dp[ind1][ind2-1]);
+    }
+   }
+  return dp[n][m];
     }
 public:
     int minDistance(string word1, string word2) {
         int n = word1.size();
-        int m =word2.size();
-        vector<vector<int>> dp(n+1, vector<int> (m+1,-1));
-    int LCS = lcs(n-1, m-1, word1, word2,dp);
-    int ans= n+m - 2*LCS;
-    return ans;
+        int m = word2.size();
+    int k = lcs(word1, word2);
+    
+ 
+    return (n+m)-2*k;
     }
 };
