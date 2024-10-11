@@ -1,24 +1,28 @@
 class Solution {
-    int solve(int index,vector<int> &nums, vector<int> &dp)
+    int solve(vector<int> &nums)
     {
+        int n = nums.size();
+        vector<int> dp(n+1,0);
+
         // base case
-   if(index<0){
-    return 0;
-   }
-   if(dp[index] != -1){
-    return dp[index];
-   }
-        // not take
-    int notTake = solve(index-1, nums,dp);
-    int take=0;
- take = nums[index] + solve(index-2,nums,dp);
-   
-    return dp[index] = max(take,notTake);
+       dp[0] = nums[0];
+
+ for(int index=1;index<n;index++)
+ {
+     int take = nums[index];
+ if(index > 1){
+take += dp[index-2];
+ } 
+  int notTake =0+ dp[index-1];
+    
+    dp[index] = max(take,notTake); 
+ }
+  
+  return dp[n-1];
     }
 public:
     int rob(vector<int>& nums) {
-        int n=nums.size();
-        vector<int> dp(n,-1);
-        return solve(n-1,nums,dp);
+        
+        return solve(nums);
     }
 };
