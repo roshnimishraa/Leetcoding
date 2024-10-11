@@ -5,8 +5,9 @@ class Solution {
          int n=s1.length();
         int m=s2.length();
      
-vector<vector<bool>> dp(n+1, vector<bool>(m+1,false));
-   
+vector<bool> next(m+1,false);
+vector<bool> curr(m+1,false);
+
    if(n+m != s3.size()){
     return false;
    }
@@ -15,27 +16,28 @@ for(int i=n; i>=0; i--){
     {
         int k=i+j;
      if(i==n && j==m && k==s3.size()){
-        dp[i][j] = true;
+       curr[j] = true;
      }
 
  else{
      bool result = false;
     if(i<n && s1[i] == s3[k])
     {
-        result= dp[i+1][j];
+        result= next[j];
     }
    
     if(j<m && s2[j] == s3[k])
     {
-     result = result || dp[i][j+1];
+     result = result || curr[j+1];
     }
-    dp[i][j] = result;
+   curr[j] = result;
  }
+ next = curr;
     }
 }
 
        
-return dp[0][0];
+return next[0];
 
     }
 public:
