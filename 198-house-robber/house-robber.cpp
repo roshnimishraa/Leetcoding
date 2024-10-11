@@ -2,23 +2,25 @@ class Solution {
     int solve(vector<int> &nums)
     {
         int n = nums.size();
-        vector<int> dp(n+1,0);
+       int prev=0, prev2=0;
 
         // base case
-       dp[0] = nums[0];
+      prev = nums[0];
 
  for(int index=1;index<n;index++)
  {
      int take = nums[index];
  if(index > 1){
-take += dp[index-2];
+take += prev2;
  } 
-  int notTake =0+ dp[index-1];
+  int notTake =0+ prev;
     
-    dp[index] = max(take,notTake); 
+   int curr = max(take,notTake); 
+    prev2=prev;
+    prev = curr;
  }
   
-  return dp[n-1];
+  return prev;
     }
 public:
     int rob(vector<int>& nums) {
