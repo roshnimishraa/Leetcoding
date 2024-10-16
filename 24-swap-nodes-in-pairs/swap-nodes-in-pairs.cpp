@@ -11,17 +11,12 @@
 class Solution {
 public:
     ListNode* swapPairs(ListNode* head) {
-        
-        if(head == NULL || head->next == NULL) return head;
-        
-        ListNode *first,*second,*newHead;
-    first = head;
-    second = head->next;
-    newHead = swapPairs(head->next->next);
-    
-    //swap the nodes
-    second ->next = first;
-    first -> next = newHead;
-    return second;
+        ListNode* temp = head;
+    while(temp != NULL && temp->next != NULL)
+    {
+        swap(temp->val, temp->next->val);
+    temp = temp->next->next;
+    }
+    return head;
     }
 };
