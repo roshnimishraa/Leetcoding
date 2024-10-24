@@ -28,7 +28,7 @@ public:
        {
         int u = it[0];
         int v = it[1];
-        adj[v].push_back(u);
+        adj[u].push_back(v);
        }
        vector<int> vis(numCourses,0);
        vector<int> pathVis(numCourses,0);
