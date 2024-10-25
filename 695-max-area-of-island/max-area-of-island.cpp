@@ -1,45 +1,54 @@
 class Solution {
-    private:
-    void dfs(vector<vector<int>> &grid, int row, int col, int &count)
+    bool isValid(int row, int col, vector<vector<int>> &grid)
     {
         int n = grid.size();
         int m = grid[0].size();
- int dx[] = {-1, 1, 0, 0};
- int dy[] = {0, 0, 1, -1};
 
-    count += 1; //increment
-
-    grid[row][col] = 0; // mark cell as visited
-
-    for(int i=0;i<4;i++)
-    {
-        int nrow = row + dx[i];
-        int ncol = col + dy[i];
-
-    if(nrow>=0 && nrow<n && ncol>=0 && ncol<m &&
-    grid[nrow][ncol] == 1)
-    {
-        dfs(grid, nrow, ncol, count);
-    }
-    }
+return (row>=0 && row<n && col>=0 && col<m &&
+grid[row][col] == 1);
     }
 public:
     int maxAreaOfIsland(vector<vector<int>>& grid) {
-        int n = grid.size();
+         int n = grid.size();
         int m = grid[0].size();
- int maxArea =0;
-        for(int i=0;i<n;i++)
+ int dx[] = {-1, 1, 0, 0};
+ int dy[] = {0, 0, 1, -1};
+int ans=0;
+queue<pair<int,int>> q;
+
+for(int i=0;i<n;i++)
+{
+    for(int j=0;j<m;j++)
+    {
+        if(grid[i][j] == 1)
         {
-            for(int j=0;j<m;j++)
-            {
-         if(grid[i][j] == 1)
-         {
-            int area = 0;
-            dfs(grid,i,j,area);
-            maxArea = max(maxArea, area);
-         }
-            }
+            grid[i][j] = 0; // marks as visited
+           int count = 1;
+         q.push({i,j});
+
+    while(!q.empty())
+    {
+        auto it = q.front();
+        q.pop();
+        int x = it.first;
+        int y = it.second;
+        for(int k=0;k<4;k++)
+        {
+        int nrow = x + dx[k];
+        int ncol = y + dy[k];
+
+    if(isValid(nrow, ncol, grid)==true)
+    {
+        grid[nrow][ncol] = 0;
+        count++;
+        q.push({nrow,ncol});
+    }
         }
-        return maxArea;
+    }
+    ans = max(ans, count);
+    }
+    }
+}
+return ans;
     }
 };
