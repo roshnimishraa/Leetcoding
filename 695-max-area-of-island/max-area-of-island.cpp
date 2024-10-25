@@ -7,7 +7,7 @@ class Solution {
  int dx[] = {-1, 1, 0, 0};
  int dy[] = {0, 0, 1, -1};
 
-    count += 1; //increment count
+    count += 1; //increment
 
     grid[row][col] = 0; // mark cell as visited
 
