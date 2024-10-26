@@ -1,5 +1,5 @@
 class Solution {
-    bool dfs(vector<vector<int>> &grid, int k)
+    bool dfs(vector<vector<int>> &grid, int time)
     {
         int n = grid.size();
         vector<vector<int>> vis(n,vector<int> (n,0));
@@ -23,7 +23,7 @@ class Solution {
                 int ncol = col + dy[i];
 
         if(nrow>=0 && ncol>=0 && nrow<n && ncol<n && 
-        grid[nrow][ncol] <= k && !vis[nrow][ncol])
+        grid[nrow][ncol] <= time && !vis[nrow][ncol])
         {
             vis[nrow][ncol] = 1;
             q.push({nrow,ncol});
